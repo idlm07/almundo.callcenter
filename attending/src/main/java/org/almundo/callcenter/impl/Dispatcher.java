@@ -1,4 +1,4 @@
-package org.almundo.callcenter.logica;
+package org.almundo.callcenter.impl;
 
 import java.util.Collections;
 import java.util.List;

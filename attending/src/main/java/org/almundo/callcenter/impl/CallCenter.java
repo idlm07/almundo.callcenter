@@ -1,4 +1,4 @@
-package org.almundo.callcenter.logica;
+package org.almundo.callcenter.impl;
 
 import org.almundo.callcenter.ICallCenter;
 import org.almundo.callcenter.IDispatcher;
@@ -44,8 +44,13 @@ public class CallCenter implements ICallCenter {
 				//Mostrar receptor asignado
 				System.out.println("Llamada atendida por: "+ receptor);
 				
+				//Seguir intentando, pues es una contestadora virtual.
+				if("Contestadora Virtual".equals(receptor.obtenerNombre()))
+					intentar = true;
+				
 				//No seguir intentando, puesto que ya lo encontró.
-				intentar = false;
+				else
+					intentar = false;
 				
 			} 
 			//No encontró receptor de la llamada.

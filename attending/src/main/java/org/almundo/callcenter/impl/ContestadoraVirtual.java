@@ -13,7 +13,7 @@ public class ContestadoraVirtual implements IReceptorLlamada {
 	}
 
 	public boolean atenderLlamada(ILlamada llamada) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
@@ -27,7 +27,7 @@ public class ContestadoraVirtual implements IReceptorLlamada {
 	}
 
 	public int obtenerPrioridad() {
-		return 1;
+		return -1;
 	}
 	
 	

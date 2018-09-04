@@ -40,7 +40,7 @@ public class FabricaReceptores {
 	public static List<IReceptorLlamada> crearAutomaticos() {
 		
 		List<IReceptorLlamada> automaticos = new ArrayList<IReceptorLlamada>();
-		automaticos.add(new ContestadoraVirtual());
+//		automaticos.add(new ContestadoraVirtual());
 		
 		return automaticos;
 	}
