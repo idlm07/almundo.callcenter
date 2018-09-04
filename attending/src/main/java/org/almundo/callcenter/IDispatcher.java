@@ -10,18 +10,14 @@ import org.almundo.callcenter.exceptions.AttendingException;
  */
 public interface IDispatcher{
 	
-	/**
-	 * Agrega a llamada a despachar.
-	 * @param llamada Llamada entrante
-	 */
-	public void addCall(ILlamada llamada);
 	
 	/**
 	 * Buscar un receptor de llamada disponible.
 	 * @return Receptor de Llamada
 	 * @throws AttendingException si no existe ninguno disponible
 	 */
-	public IReceptorLlamada dispatchCall() throws AttendingException;
+	public IReceptorLlamada dispatchCall(ILlamada llamada) throws AttendingException;
+
 	
 
 }

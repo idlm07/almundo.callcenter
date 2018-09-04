@@ -3,6 +3,12 @@ package org.almundo.callcenter;
 public interface ILlamada {
 
 	/**
+	 * Identificador de la llamada
+	 * @return
+	 */
+	public String obtenerId();
+	
+	/**
 	 * Inicia la llamada
 	 * @return
 	 */

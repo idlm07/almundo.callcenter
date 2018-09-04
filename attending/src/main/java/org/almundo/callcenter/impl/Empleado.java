@@ -36,7 +36,8 @@ public abstract class Empleado implements IReceptorLlamada {
 			int duracion = RandomUtil.randomRango(5, 10);
 			try {
 				Thread.sleep(duracion*1000);
-			} catch (InterruptedException e) {}
+				System.out.println("Espera de "+duracion + "segs.");
+			} catch (InterruptedException e) {e.printStackTrace();}
 			
 			return duracion;
 		}
@@ -54,7 +55,7 @@ public abstract class Empleado implements IReceptorLlamada {
 	public ILlamada finalizarLlamada() {
 		ILlamada llamadaAFinalizar = llamadaEnCurso;
 		//Finalizar llamada
-		llamadaEnCurso.finalizar();
+		llamadaAFinalizar.finalizar();
 		llamadaEnCurso = null;
 		
 		

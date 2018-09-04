@@ -4,6 +4,7 @@ import org.almundo.callcenter.ICallCenter;
 import org.almundo.callcenter.IDispatcher;
 import org.almundo.callcenter.ILlamada;
 import org.almundo.callcenter.IReceptorLlamada;
+import org.almundo.callcenter.fabricas.FabricaDispatchers;
 
 /**
  * Clase encargada de la atención de las llamadas
@@ -21,13 +22,13 @@ public class CallCenter implements ICallCenter {
 	 */
 	public CallCenter() {
 		//Inicializar el dispatcher
-		this.dispatcher = new Dispatcher();
+		this.dispatcher = FabricaDispatchers.obtenerInstanciaDispatcher();
 	}
 	
 	/**
 	 * Recibir llamada y direccionar su atención
 	 */
-	public boolean recibirLlamada(ILlamada llamada) throws Exception {
+	public synchronized boolean recibirLlamada(ILlamada llamada) throws Exception {
 		
 		//Declaración de variables del método.
 		IReceptorLlamada 	receptor 	= null;
@@ -39,8 +40,7 @@ public class CallCenter implements ICallCenter {
 			try {
 				
 				//Delega al Dispatcher que busque un empleado disponible.
-				dispatcher.addCall(llamada);
-				receptor = dispatcher.dispatchCall();
+				receptor = dispatcher.dispatchCall(llamada);
 				
 				//Mostrar receptor asignado
 				System.out.println("Llamada atendida por: "+ receptor);

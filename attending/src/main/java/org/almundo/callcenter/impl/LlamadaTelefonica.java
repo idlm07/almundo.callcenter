@@ -8,6 +8,10 @@ import org.almundo.callcenter.IReceptorLlamada;
 
 public class LlamadaTelefonica implements ILlamada {
 
+	private String id;
+	public String getId() {return id;}
+	public void setId(String id) {this.id = id;}
+	
 	private IEmisorLlamada emisor;
 	public IEmisorLlamada getEmisor() {return emisor;}
 	public void setEmisor(IEmisorLlamada emisor) {this.emisor = emisor;}
@@ -25,6 +29,13 @@ public class LlamadaTelefonica implements ILlamada {
 	public void setFin(Date fin) {this.fin = fin;}
 	
 	public LlamadaTelefonica() {}
+	public LlamadaTelefonica(String id) {
+		this.id = id;
+	}
+	
+	public String obtenerId() {
+		return id;
+	}
 	
 	/**
 	 * Inicia la llamada entre un emisor y un receptor.
@@ -75,7 +86,7 @@ public class LlamadaTelefonica implements ILlamada {
 	}
 	@Override
 	public String toString() {
-		return "LlamadaTelefonica [emisor=" + emisor + ", receptor=" + receptor
+		return "LlamadaTelefonica [id=" + id + ", emisor=" + emisor + ", receptor=" + receptor
 				+ "]";
 	}
 

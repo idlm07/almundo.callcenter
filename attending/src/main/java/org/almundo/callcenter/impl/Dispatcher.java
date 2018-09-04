@@ -10,12 +10,15 @@ import org.almundo.callcenter.exceptions.AttendingException;
 import org.almundo.callcenter.fabricas.FabricaReceptores;
 import org.almundo.callcenter.utils.ComparatorIReceptorLlamada;
 
-public class  Dispatcher implements IDispatcher {
+/**
+ * Clase que realiza el despacho de la información
+ * @author IvanLemus
+ *
+ */
+public class Dispatcher implements IDispatcher {
 
-	private ILlamada llamada;
-	private IReceptorLlamada receptorSeleccionado;
 	
-	private List<IReceptorLlamada> empleados;
+	public List<IReceptorLlamada> empleados;
 	public List<IReceptorLlamada> getEmpleados() {return empleados;}
 	public void setEmpleados(List<IReceptorLlamada> empleados) {this.empleados = empleados;}
 	
@@ -29,30 +32,25 @@ public class  Dispatcher implements IDispatcher {
 	public Dispatcher() {
 		this.empleados 		= FabricaReceptores.crearEmpleados();
 		this.automaticos 	= FabricaReceptores.crearAutomaticos();
+		
+		//Ordenar por prioridad.
+		Collections.sort(empleados, new ComparatorIReceptorLlamada());
 	}
 	
-	/**
-	 * Agregar llamada a despachar
-	 */
-	public void addCall(ILlamada llamada) {
-		this.llamada = llamada;
-	}
 	
 	/**
 	 * Despachar llamada adicionada
 	 */
-	public IReceptorLlamada dispatchCall() throws AttendingException {
+	public IReceptorLlamada dispatchCall(ILlamada llamada) throws AttendingException {
 
 		//Inicializar variables
-		receptorSeleccionado = null;
+		IReceptorLlamada receptorSeleccionado = null;
 		
 		//Validar receptores de llamadas
 		if((empleados 	== null || empleados.isEmpty() ) && 
 		   (automaticos == null || automaticos.isEmpty()))
 			throw new AttendingException("No hay ningún recurso disponible para atender la llamada. Intente más tarde. Gracias");
 		
-		//Ordenar por prioridad.
-		Collections.sort(empleados, new ComparatorIReceptorLlamada());
 		
 		//Busca si existe un empleado disponible.
 		for(IReceptorLlamada empleado : empleados){
@@ -76,12 +74,15 @@ public class  Dispatcher implements IDispatcher {
 		if(receptorSeleccionado == null)
 			throw new AttendingException("No hay ningún recurso disponible para atender la llamada. Intente más tarde. Gracias");
 		
+		
 		//Asignar receptor a la llamada
-		int duracion = receptorSeleccionado.atenderLlamada(llamada);
-		System.out.println("Duración de "+ duracion + " segs para la " + llamada);
-		receptorSeleccionado.finalizarLlamada();
+		synchronized(receptorSeleccionado) {
+			int duracion = receptorSeleccionado.atenderLlamada(llamada);
+			receptorSeleccionado.finalizarLlamada();
+		}
 		
 		return receptorSeleccionado;
 	}
+
 
 }
