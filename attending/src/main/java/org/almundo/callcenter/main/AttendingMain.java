@@ -1,6 +1,11 @@
-package org.almundo.callcenter;
+package org.almundo.callcenter.main;
 
+import org.almundo.callcenter.Proceso;
 
+/**
+ * Clase principal para la ejecución de los hilos
+ * @author IvanLemus
+ */
 public class AttendingMain {
 
 	public static void main(String[] args) {
