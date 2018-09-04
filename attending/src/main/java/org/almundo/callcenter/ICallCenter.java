@@ -1,6 +1,5 @@
 package org.almundo.callcenter;
 
-import org.almundo.callcenter.exceptions.AttendingException;
 
 public interface ICallCenter {
 

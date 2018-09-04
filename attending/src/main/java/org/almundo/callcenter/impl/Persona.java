@@ -14,6 +14,13 @@ public class Persona implements IEmisorLlamada{
 	public ILlamada getLlamadaEnCurso() {return llamadaEnCurso;}
 	public void setLlamadaEnCurso(ILlamada llamadaEnCurso) {this.llamadaEnCurso = llamadaEnCurso;}
 
+	/**
+	 * Constrctor de persona
+	 * @param nombre Nombre de la persona que llama
+	 */
+	public Persona(String nombre){
+		this.nombre = nombre;
+	}
 	
 	/**
 	 * Valida si el empleado tiene una llamada en curso.
@@ -54,6 +61,11 @@ public class Persona implements IEmisorLlamada{
 		else{
 			return null;
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return "Persona [nombre=" + nombre + "]";
 	}
 
 }

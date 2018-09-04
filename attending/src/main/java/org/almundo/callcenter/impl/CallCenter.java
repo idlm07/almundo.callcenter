@@ -10,7 +10,7 @@ import org.almundo.callcenter.IReceptorLlamada;
  * @author IvanLemus
  */
 public class CallCenter implements ICallCenter {
-
+	
 	/** Atributo despachador de llamadas*/
 	private IDispatcher dispatcher;
 	public IDispatcher getDispatcher() {return dispatcher;}
@@ -39,7 +39,8 @@ public class CallCenter implements ICallCenter {
 			try {
 				
 				//Delega al Dispatcher que busque un empleado disponible.
-				receptor = dispatcher.dispatchCall(llamada);
+				dispatcher.addCall(llamada);
+				receptor = dispatcher.dispatchCall();
 				
 				//Mostrar receptor asignado
 				System.out.println("Llamada atendida por: "+ receptor);

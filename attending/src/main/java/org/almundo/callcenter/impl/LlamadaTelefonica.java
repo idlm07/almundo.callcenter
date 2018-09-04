@@ -45,6 +45,10 @@ public class LlamadaTelefonica implements ILlamada {
 		
 		if(fin == null){
 			fin = new Date();
+			
+			if(!emisor.estaDisponible())
+				emisor.finalizarLlamada();
+			
 			return true;
 		}else{
 			return false;
@@ -57,7 +61,7 @@ public class LlamadaTelefonica implements ILlamada {
 	 * y la fecha fin.
 	 */
 	public int duracion() {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 	
@@ -69,5 +73,12 @@ public class LlamadaTelefonica implements ILlamada {
 		
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "LlamadaTelefonica [emisor=" + emisor + ", receptor=" + receptor
+				+ "]";
+	}
 
+	
+	
 }

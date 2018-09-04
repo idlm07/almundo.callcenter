@@ -14,4 +14,10 @@ public class Director extends Empleado{
 	public int obtenerPrioridad() {
 		return 3;
 	}
+
+	@Override
+	public String toString() {
+		return "Director [nombre=" + nombre + ", estaDisponible()="
+				+ estaDisponible() + "]";
+	}
 }

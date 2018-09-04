@@ -8,13 +8,12 @@ public class ContestadoraVirtual implements IReceptorLlamada {
 	public ContestadoraVirtual() {}
 
 	public boolean estaDisponible() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
-	public boolean atenderLlamada(ILlamada llamada) {
-		
-		return false;
+	public int atenderLlamada(ILlamada llamada) {
+
+		return 0;
 	}
 
 	public ILlamada finalizarLlamada() {
@@ -29,7 +28,11 @@ public class ContestadoraVirtual implements IReceptorLlamada {
 	public int obtenerPrioridad() {
 		return -1;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "ContestadoraVirtual [estaDisponible()=" + estaDisponible()
+				+ ", obtenerNombre()=" + obtenerNombre() + "]";
+	}
 
 }

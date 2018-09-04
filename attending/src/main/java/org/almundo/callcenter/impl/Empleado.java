@@ -2,6 +2,7 @@ package org.almundo.callcenter.impl;
 
 import org.almundo.callcenter.ILlamada;
 import org.almundo.callcenter.IReceptorLlamada;
+import org.almundo.callcenter.utils.RandomUtil;
 
 public abstract class Empleado implements IReceptorLlamada {
 
@@ -24,17 +25,24 @@ public abstract class Empleado implements IReceptorLlamada {
 	 * Atender la llamadaEntrante siempre y cuando esté disponible
 	 * para atenderla.
 	 */
-	public boolean atenderLlamada(ILlamada llamadaEntrante) {
+	public int atenderLlamada(ILlamada llamadaEntrante) {
 
 		//Atiende la llamada si está disponible
 		if(estaDisponible()){
 			llamadaEnCurso = llamadaEntrante;
 			llamadaEnCurso.contestar(this);
-			return true;
+
+			//Esperar la duración de la llamada
+			int duracion = RandomUtil.randomRango(5, 10);
+			try {
+				Thread.sleep(duracion*1000);
+			} catch (InterruptedException e) {}
+			
+			return duracion;
 		}
 		//De lo contrario la rechaza.
 		else{
-			return false;
+			return 0;
 		}
 		
 	}
@@ -46,7 +54,9 @@ public abstract class Empleado implements IReceptorLlamada {
 	public ILlamada finalizarLlamada() {
 		ILlamada llamadaAFinalizar = llamadaEnCurso;
 		//Finalizar llamada
+		llamadaEnCurso.finalizar();
 		llamadaEnCurso = null;
+		
 		
 		return llamadaAFinalizar;
 	}

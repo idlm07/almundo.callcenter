@@ -1,7 +1,7 @@
 package org.almundo.callcenter.impl;
 
 public class Supervisor extends Empleado{
-	
+
 	public Supervisor(String nombre) {
 		this.nombre = nombre;
 	}
@@ -12,5 +12,11 @@ public class Supervisor extends Empleado{
 	
 	public int obtenerPrioridad() {
 		return 2;
+	}
+	
+	@Override
+	public String toString() {
+		return "Supervisor [nombre=" + nombre + ", estaDisponible()="
+				+ estaDisponible() + "]";
 	}
 }

@@ -14,4 +14,10 @@ public class Operador extends Empleado {
 		return 1;
 	}
 
+	@Override
+	public String toString() {
+		return "Operador [nombre=" + nombre + ", estaDisponible()="
+				+ estaDisponible() + "]";
+	}
+	
 }
