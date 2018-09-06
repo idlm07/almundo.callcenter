@@ -13,7 +13,15 @@ public abstract class Empleado implements IReceptorLlamada {
 	private ILlamada llamadaEnCurso;
 	public ILlamada getLlamadaEnCurso() {return llamadaEnCurso;}
 	public void setLlamadaEnCurso(ILlamada llamadaEnCurso) {this.llamadaEnCurso = llamadaEnCurso;}
+	
+	private int llamadasAtendidas;
+	public int getLlamadasAtendidas() {return llamadasAtendidas;}
+	public void setLlamadasAtendidas(int llamadasAtendidas) {this.llamadasAtendidas = llamadasAtendidas;}
 
+	public Empleado() {
+		llamadasAtendidas = 0;
+	}
+	
 	/**
 	 * Valida si el empleado tiene una llamada en curso.
 	 */
@@ -65,10 +73,18 @@ public abstract class Empleado implements IReceptorLlamada {
 	public ILlamada finalizarLlamada() {
 		ILlamada llamadaAFinalizar = llamadaEnCurso;
 		//Finalizar llamada
-		llamadaAFinalizar.finalizar();
-		llamadaEnCurso = null;
-		
+		if(llamadaAFinalizar.finalizar()){
+			llamadasAtendidas++;
+			llamadaEnCurso = null;
+		}
 		
 		return llamadaAFinalizar;
+	}
+	
+	/**
+	 * Obtener el numero de llamadas atendidas
+	 */
+	public int obtenerLlamadasAtendidas() {
+		return llamadasAtendidas;
 	}
 }

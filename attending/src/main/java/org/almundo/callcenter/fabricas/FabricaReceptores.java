@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.almundo.callcenter.IReceptorLlamada;
+import org.almundo.callcenter.impl.ContestadoraVirtual;
 import org.almundo.callcenter.impl.Director;
 import org.almundo.callcenter.impl.Operador;
 import org.almundo.callcenter.impl.Supervisor;
@@ -22,6 +23,10 @@ public class FabricaReceptores {
 		List<IReceptorLlamada> empleados = new ArrayList<IReceptorLlamada>();
 		
 		//Poblar la lista de empleados
+		for(int i=1; i<= AttendingParams.NUM_DIRECTORES ; i++ ){
+			empleados.add(new Director("" + i));
+		}
+		
 		for(int i=1; i<= AttendingParams.NUM_OPERADORES ; i++ ){
 			empleados.add(new Operador("" + i));
 		}
@@ -29,10 +34,7 @@ public class FabricaReceptores {
 		for(int i=1; i<= AttendingParams.NUM_SUPERVISORES ; i++ ){
 			empleados.add(new Supervisor("" + i));
 		}
-		
-		for(int i=1; i<= AttendingParams.NUM_DIRECTORES ; i++ ){
-			empleados.add(new Director("" + i));
-		}
+
 		
 		//Ordenar por prioridad de atención.
 		Collections.sort(empleados, new ComparatorIReceptorLlamada());
@@ -46,7 +48,10 @@ public class FabricaReceptores {
 	public static List<IReceptorLlamada> crearAutomaticos() {
 		
 		List<IReceptorLlamada> automaticos = new ArrayList<IReceptorLlamada>();
-//		automaticos.add(new ContestadoraVirtual());
+		
+		for(int i=1; i<= AttendingParams.NUM_VIRTUAL ; i++ ){
+			automaticos.add(new ContestadoraVirtual());
+		}
 		
 		return automaticos;
 	}

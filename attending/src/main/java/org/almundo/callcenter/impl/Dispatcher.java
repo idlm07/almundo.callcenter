@@ -70,9 +70,13 @@ public class Dispatcher implements IDispatcher {
 		// se busca si existe un recurso automático.
 		if(receptorSeleccionado == null){
 			for(IReceptorLlamada automatico : automaticos){
-				if(automatico.estaDisponible()){
-					receptorSeleccionado = automatico;
-					break;
+				synchronized (automatico) {
+					if(automatico.estaDisponible()){
+						duracionLlamada = automatico.asignarLlamada(llamada);
+						System.out.println("Llamada "+llamada.obtenerId() + " - Asignada a: "+ automatico);
+						receptorSeleccionado = automatico;
+						break;
+					}
 				}
 			} 
 		}

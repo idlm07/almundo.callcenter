@@ -8,5 +8,6 @@ public interface IReceptorLlamada {
 	public int asignarLlamada(ILlamada llamada);
 	public void atenderLlamada(int duracion);
 	public ILlamada finalizarLlamada();
+	public int obtenerLlamadasAtendidas();
 	
 }
