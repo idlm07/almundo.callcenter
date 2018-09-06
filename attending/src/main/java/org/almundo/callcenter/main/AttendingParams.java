@@ -13,16 +13,15 @@ public class AttendingParams {
 	public static final int TOPE_LLAMADAS 		= 30;
 	
 	/**Cantidad de receptores tipo empleados con cargo de Operador*/
-	public static final int NUM_OPERADORES 		= 2;
+	public static final int NUM_OPERADORES 		= 5;
 	
 	/**Cantidad de receptores tipo empleados con cargo de Supervisor*/
-	public static final int NUM_SUPERVISORES 	= 2;
+	public static final int NUM_SUPERVISORES 	= 3;
 	
 	/**Cantidad de receptores tipo empleados con cargo de Directo*/
-	public static final int NUM_DIRECTORES 		= 1;
+	public static final int NUM_DIRECTORES 		= 2;
 	
 	/**Cantidad de receptores de llamada virtuales*/
 	public static final int NUM_VIRTUAL			= 3;
 	
-
 }
