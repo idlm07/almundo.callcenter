@@ -5,7 +5,8 @@ public interface IReceptorLlamada {
 	public String  obtenerNombre();
 	public int  obtenerPrioridad();
 	public boolean estaDisponible();
-	public int atenderLlamada(ILlamada llamada);
+	public int asignarLlamada(ILlamada llamada);
+	public void atenderLlamada(int duracion);
 	public ILlamada finalizarLlamada();
 	
 }

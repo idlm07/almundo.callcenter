@@ -33,8 +33,6 @@ public class Dispatcher implements IDispatcher {
 		this.empleados 		= FabricaReceptores.crearEmpleados();
 		this.automaticos 	= FabricaReceptores.crearAutomaticos();
 		
-		//Ordenar por prioridad.
-		Collections.sort(empleados, new ComparatorIReceptorLlamada());
 	}
 	
 	
@@ -45,6 +43,7 @@ public class Dispatcher implements IDispatcher {
 
 		//Inicializar variables
 		IReceptorLlamada receptorSeleccionado = null;
+		int duracionLlamada = 0;
 		
 		//Validar receptores de llamadas
 		if((empleados 	== null || empleados.isEmpty() ) && 
@@ -54,9 +53,16 @@ public class Dispatcher implements IDispatcher {
 		
 		//Busca si existe un empleado disponible.
 		for(IReceptorLlamada empleado : empleados){
-			if(empleado.estaDisponible()){
-				receptorSeleccionado = empleado;
-				break;
+			synchronized (empleado) {
+				if(empleado.estaDisponible()){
+					
+					//Asignar receptor a la llamada
+					duracionLlamada = empleado.asignarLlamada(llamada);
+					System.out.println("Llamada "+llamada.obtenerId() + " - Asignada a: "+ empleado);
+					receptorSeleccionado = empleado;
+					
+					break;
+				}
 			}
 		}
 		
@@ -74,12 +80,12 @@ public class Dispatcher implements IDispatcher {
 		if(receptorSeleccionado == null)
 			throw new AttendingException("No hay ningún recurso disponible para atender la llamada. Intente más tarde. Gracias");
 		
+		//Atender llamada
+		receptorSeleccionado.atenderLlamada(duracionLlamada);
 		
-		//Asignar receptor a la llamada
-		synchronized(receptorSeleccionado) {
-			int duracion = receptorSeleccionado.atenderLlamada(llamada);
-			receptorSeleccionado.finalizarLlamada();
-		}
+		//Llamada finalizada
+		receptorSeleccionado.finalizarLlamada();
+		System.out.println("Llamada " + llamada.obtenerId() + " - Fin (duracion:" + duracionLlamada + "segs.)");
 		
 		return receptorSeleccionado;
 	}

@@ -2,7 +2,7 @@ package attending;
 
 import static org.junit.Assert.assertTrue;
 
-import org.almundo.callcenter.Proceso;
+import org.almundo.callcenter.ProcesoLlamada;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -19,7 +19,7 @@ public class TestDiezLlamadas {
 	public void test() {
 		//Procesamiento en paralelo de 10 llamadas
 		
-		Thread proceso = new Proceso("Proceso 1");
+		Thread proceso = new ProcesoLlamada("Proceso 1");
 		proceso.start();
 		
 		

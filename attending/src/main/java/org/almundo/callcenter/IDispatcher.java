@@ -14,7 +14,7 @@ public interface IDispatcher{
 	/**
 	 * Buscar un receptor de llamada disponible.
 	 * @return Receptor de Llamada
-	 * @throws AttendingException si no existe ninguno disponible
+	 * @throws AttendingException si no existe ninguno disponible.
 	 */
 	public IReceptorLlamada dispatchCall(ILlamada llamada) throws AttendingException;
 

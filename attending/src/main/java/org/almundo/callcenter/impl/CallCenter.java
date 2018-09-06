@@ -28,7 +28,7 @@ public class CallCenter implements ICallCenter {
 	/**
 	 * Recibir llamada y direccionar su atención
 	 */
-	public synchronized boolean recibirLlamada(ILlamada llamada) throws Exception {
+	public boolean recibirLlamada(ILlamada llamada) throws Exception {
 		
 		//Declaración de variables del método.
 		IReceptorLlamada 	receptor 	= null;
@@ -42,9 +42,6 @@ public class CallCenter implements ICallCenter {
 				//Delega al Dispatcher que busque un empleado disponible.
 				receptor = dispatcher.dispatchCall(llamada);
 				
-				//Mostrar receptor asignado
-				System.out.println("Llamada atendida por: "+ receptor);
-				
 				//Seguir intentando, pues es una contestadora virtual.
 				if("Contestadora Virtual".equals(receptor.obtenerNombre()))
 					intentar = true;
@@ -56,13 +53,19 @@ public class CallCenter implements ICallCenter {
 			} 
 			//No encontró receptor de la llamada.
 			catch (Exception e) {
+				
+				System.out.println("Llamada " + llamada.obtenerId() + " - EnEspera");
 				//Esperar 10 segundos.
 				Thread.sleep(10000);
 				
 				//Validar numero de intentos
 				numIntentos--;
-				if(0 == numIntentos)
+				if(0 == numIntentos){
 					intentar = false;
+				}
+				
+				System.out.println("Llamada " + llamada.obtenerId() + " - Reintento " + numIntentos);
+				
 			}
 		}
 		

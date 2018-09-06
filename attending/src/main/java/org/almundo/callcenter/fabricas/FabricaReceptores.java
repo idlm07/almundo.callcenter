@@ -1,12 +1,14 @@
 package org.almundo.callcenter.fabricas;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.almundo.callcenter.IReceptorLlamada;
 import org.almundo.callcenter.impl.Director;
 import org.almundo.callcenter.impl.Operador;
 import org.almundo.callcenter.impl.Supervisor;
+import org.almundo.callcenter.utils.ComparatorIReceptorLlamada;
 
 public class FabricaReceptores {
 
@@ -26,6 +28,9 @@ public class FabricaReceptores {
 //		empleados.add(new Operador("2"));
 		empleados.add(new Supervisor("1"));
 //		empleados.add(new Supervisor("2"));
+		
+		//Ordenar por prioridad.
+		Collections.sort(empleados, new ComparatorIReceptorLlamada());
 		
 		return empleados;
 	}

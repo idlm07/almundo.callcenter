@@ -17,7 +17,7 @@ public abstract class Empleado implements IReceptorLlamada {
 	/**
 	 * Valida si el empleado tiene una llamada en curso.
 	 */
-	public boolean estaDisponible() {
+	public synchronized boolean estaDisponible() {
 		return llamadaEnCurso == null ? true : false;
 	}
 
@@ -25,26 +25,36 @@ public abstract class Empleado implements IReceptorLlamada {
 	 * Atender la llamadaEntrante siempre y cuando esté disponible
 	 * para atenderla.
 	 */
-	public int atenderLlamada(ILlamada llamadaEntrante) {
+	public synchronized int asignarLlamada(ILlamada llamadaEntrante) {
 
 		//Atiende la llamada si está disponible
 		if(estaDisponible()){
 			llamadaEnCurso = llamadaEntrante;
 			llamadaEnCurso.contestar(this);
-
-			//Esperar la duración de la llamada
-			int duracion = RandomUtil.randomRango(5, 10);
-			try {
-				Thread.sleep(duracion*1000);
-				System.out.println("Espera de "+duracion + "segs.");
-			} catch (InterruptedException e) {e.printStackTrace();}
 			
-			return duracion;
+			return RandomUtil.randomRango(5, 10); 
 		}
-		//De lo contrario la rechaza.
-		else{
-			return 0;
+		
+		return 0;
+	}
+	
+	/**
+	 * Atender la llamadaEntrante siempre y cuando esté disponible
+	 * para atenderla.
+	 */
+	public void atenderLlamada(int duracion) {
+
+		//Si está disponible no atiende ninguna llamada
+		if(estaDisponible()){
+			return;
 		}
+		
+		//Atender Llamada en curso
+		try {
+			System.out.println("Llamada " + llamadaEnCurso.obtenerId() + " - EnCurso...");
+			Thread.sleep(duracion*1000);
+		} catch (InterruptedException e) {e.printStackTrace();}
+		
 		
 	}
 

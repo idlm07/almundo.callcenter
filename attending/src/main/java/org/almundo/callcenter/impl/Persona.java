@@ -25,7 +25,7 @@ public class Persona implements IEmisorLlamada{
 	/**
 	 * Valida si el empleado tiene una llamada en curso.
 	 */
-	public boolean estaDisponible() {
+	public synchronized boolean estaDisponible() {
 		return llamadaEnCurso == null ? true : false;
 	}
 
@@ -44,23 +44,22 @@ public class Persona implements IEmisorLlamada{
 	 * Recibe una 
 	 */
 	public ILlamada realizarLlamada() {
-		//Atiende la llamada si está disponible
-		if(estaDisponible()){
-			
-			//Iniciar la llamada.
-			ILlamada llamadaNueva = FabricaLlamadas.crearLlamadaTelefonica();
-			llamadaNueva.iniciar(this);
-			
-			//Asignar a llamada en curso.
-			llamadaEnCurso = llamadaNueva;
-			
-			//Retornar nueva llamada
-			return llamadaNueva;
-		}
-		//De lo contrario la rechaza.
-		else{
+		
+		//Validación: NO Realiza la llamada si está ocupada
+		if(!estaDisponible())
 			return null;
-		}
+		
+		
+		//Iniciar la llamada.
+		ILlamada llamadaNueva = FabricaLlamadas.crearLlamadaTelefonica(this);
+		
+		//Asignar a llamada en curso.
+		llamadaEnCurso = llamadaNueva;
+		System.out.println("Llamada " + llamadaNueva.obtenerId() + " - Inicio");
+		
+		//Retornar nueva llamada
+		return llamadaEnCurso;
+		
 	}
 	
 	@Override

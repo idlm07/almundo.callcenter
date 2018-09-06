@@ -11,13 +11,7 @@ public class ContestadoraVirtual implements IReceptorLlamada {
 		return true;
 	}
 
-	public int atenderLlamada(ILlamada llamada) {
-
-		return 0;
-	}
-
 	public ILlamada finalizarLlamada() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -33,6 +27,15 @@ public class ContestadoraVirtual implements IReceptorLlamada {
 	public String toString() {
 		return "ContestadoraVirtual [estaDisponible()=" + estaDisponible()
 				+ ", obtenerNombre()=" + obtenerNombre() + "]";
+	}
+
+	public int asignarLlamada(ILlamada llamada) {
+
+		return 0;
+	}
+
+	public void atenderLlamada(int duracion) {
+		
 	}
 
 }

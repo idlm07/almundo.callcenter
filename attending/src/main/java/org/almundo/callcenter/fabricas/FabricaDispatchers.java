@@ -11,7 +11,7 @@ public class FabricaDispatchers {
 	 * Metodo de solitario de dispatcher
 	 * @return solitario dispatcher
 	 */
-	public static IDispatcher obtenerInstanciaDispatcher() {
+	public synchronized static IDispatcher obtenerInstanciaDispatcher() {
 		//Patron Solitario
 		if(dispatcher == null)
 			dispatcher = new Dispatcher();

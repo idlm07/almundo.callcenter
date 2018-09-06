@@ -1,7 +1,6 @@
 package org.almundo.callcenter;
 
 import org.almundo.callcenter.fabricas.FabricaCallCenters;
-import org.almundo.callcenter.impl.LlamadaTelefonica;
 import org.almundo.callcenter.impl.Persona;
 
 /**
@@ -9,10 +8,14 @@ import org.almundo.callcenter.impl.Persona;
  * @author IvanLemus
  *
  */
-public class Proceso extends Thread {
+public class ProcesoLlamada extends Thread {
 
-	public Proceso(String mensaje) {
+	private String idProceso;
+	
+	public ProcesoLlamada(String mensaje) {
 		super(mensaje);
+		
+		idProceso = mensaje;
 	}
 	
 	
@@ -21,19 +24,18 @@ public class Proceso extends Thread {
 		super.run();
 		
 		try{
-			System.out.println("Proceso: " + getName());
+			System.out.println("Proceso: " + idProceso);
 			
 			//Instanciar el call center
 			ICallCenter callCenter = FabricaCallCenters.obtenerInstanciaCallCenter();
 			
-			//Crear una llamada
-			ILlamada llamada = new LlamadaTelefonica(this.getName());
-			System.out.println(llamada);
-
-			//Iniciar la llamada
-			llamada.iniciar(new Persona("Persona No." + this.getName()));
+			//Crear persona del proceso
+			Persona emisor = new Persona("Persona del proceso:" + idProceso);
 			
-			//El Call Center Recibe la llamda
+			//Crear una llamada
+			ILlamada llamada = emisor.realizarLlamada();
+			
+			//El CallCenter Recibe la llamda
 			callCenter.recibirLlamada(llamada);
 			
 		} catch (Exception e) {
