@@ -8,6 +8,7 @@ import org.almundo.callcenter.IReceptorLlamada;
 import org.almundo.callcenter.impl.Director;
 import org.almundo.callcenter.impl.Operador;
 import org.almundo.callcenter.impl.Supervisor;
+import org.almundo.callcenter.main.AttendingParams;
 import org.almundo.callcenter.utils.ComparatorIReceptorLlamada;
 
 public class FabricaReceptores {
@@ -21,15 +22,19 @@ public class FabricaReceptores {
 		List<IReceptorLlamada> empleados = new ArrayList<IReceptorLlamada>();
 		
 		//Poblar la lista de empleados
-
-		empleados.add(new Director("1"));
-//		empleados.add(new Director("2"));
-		empleados.add(new Operador("1"));
-//		empleados.add(new Operador("2"));
-		empleados.add(new Supervisor("1"));
-//		empleados.add(new Supervisor("2"));
+		for(int i=1; i<= AttendingParams.NUM_OPERADORES ; i++ ){
+			empleados.add(new Operador("" + i));
+		}
 		
-		//Ordenar por prioridad.
+		for(int i=1; i<= AttendingParams.NUM_SUPERVISORES ; i++ ){
+			empleados.add(new Supervisor("" + i));
+		}
+		
+		for(int i=1; i<= AttendingParams.NUM_DIRECTORES ; i++ ){
+			empleados.add(new Director("" + i));
+		}
+		
+		//Ordenar por prioridad de atención.
 		Collections.sort(empleados, new ComparatorIReceptorLlamada());
 		
 		return empleados;
