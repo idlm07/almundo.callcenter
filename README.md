@@ -21,10 +21,10 @@ AttendingParams.java
 
 AttendingMain.java
 ---------
-Clase principal para la ejecución del programa.
+	Clase principal para la ejecución del programa.
 ---------
 
 TestDiezLlamadas.java
 ---------
-Clase principal para la ejecución de las pruebas unitarias.
+	Clase principal para la ejecución de las pruebas unitarias.
 ---------
