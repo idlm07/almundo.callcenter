@@ -1,4 +1,11 @@
 # almundo.callcenter
+
+Bienvenido a este repositorio, en donde se encuentran los entregables requeridos por Almundo:
+
+ATTENDING - Flyer - Iván Lemus.pdf
+---------
+	Es un documento (flyer informativo) del proyecto contenido en este repositorio.
+---------
 Las siguientes son las clases principales del sistema:
 
 AttendingParams.java
